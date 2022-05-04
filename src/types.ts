@@ -8,4 +8,5 @@ export interface FactoryApi<T> {
 
 export interface CreateApi<T> {
   (): T
+  (quantity: number): T[],
 }
