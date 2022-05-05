@@ -1,4 +1,4 @@
-import { mockFactory } from "..";
+import { objectFactory } from "..";
 
 describe("mock-factory", () => {
   describe("mockFactory", () => {
@@ -10,7 +10,7 @@ describe("mock-factory", () => {
       }
 
       it("should create a new object based on provided attribute when called with default params", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -36,7 +36,7 @@ describe("mock-factory", () => {
 
       it("should create an array with n number of new objects based on provided attribute", () => {
   
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -59,7 +59,7 @@ describe("mock-factory", () => {
 
       it("should create an array with one object if quantity is negative or zero", () => {
   
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -83,7 +83,7 @@ describe("mock-factory", () => {
       }
 
       it("should create a new object only with provided key paths", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName(),
           address: faker.address.streetAddress(),
@@ -119,7 +119,7 @@ describe("mock-factory", () => {
       }
 
       it("should create an array with n number of new objects only with provided key paths", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName(),
           address: faker.address.streetAddress(),
@@ -156,7 +156,7 @@ describe("mock-factory", () => {
       }
 
       it("should create a new object with provided overrides", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -175,7 +175,7 @@ describe("mock-factory", () => {
       });
 
       it("should create a new object with provided generator", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -185,8 +185,6 @@ describe("mock-factory", () => {
         }));
         
         const model = DafoeModel.create();
-
-        console.log("model", model);
   
         expect(model).toHaveProperty('firstname');
         expect(model.firstname).toBeDefined();
@@ -196,7 +194,7 @@ describe("mock-factory", () => {
       });
 
       it("should create an array with n number of new objects with provided overrides", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -228,7 +226,7 @@ describe("mock-factory", () => {
       }
 
       it("should generate the same object for the same seed", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -240,7 +238,7 @@ describe("mock-factory", () => {
       });
 
       it("should not generate the same object for the different seeds", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));
@@ -255,7 +253,7 @@ describe("mock-factory", () => {
       });
 
       it("should generate same objects for the same seed when creating many", () => {
-        const UserFactory = mockFactory<User>(faker => ({
+        const UserFactory = objectFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
         }));

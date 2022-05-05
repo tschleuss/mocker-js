@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import type { Source, FactoryGenerator, Builder } from "./types";
+import type { Source, FactoryGenerator, ObjectBuilder } from "./types";
 
 const isSourceGenerator = <T> (source: Source<T>): source is FactoryGenerator<T> => {
   return (typeof source === "function");
@@ -47,7 +47,7 @@ const innerPick = <T>(
   });
 };
 
-class MockBuilder<T> implements Builder<T> {
+class MockObjectBuilder<T> implements ObjectBuilder<T> {
   static #DEFAULT_QUANTITY = 1;
 
   #generator: FactoryGenerator<T>;
@@ -58,12 +58,12 @@ class MockBuilder<T> implements Builder<T> {
     this.#generator = generator;
   }
 
-  seed = (seed?: number): Builder<T> => {
+  seed = (seed?: number): ObjectBuilder<T> => {
     faker.seed(seed);
     return this;
   }
 
-  assign = (object: Partial<T>): Builder<T> => {
+  assign = (object: Partial<T>): ObjectBuilder<T> => {
     this.#source = object;
     return this;
   };
@@ -71,7 +71,7 @@ class MockBuilder<T> implements Builder<T> {
   create = (): T => {
     const models = innerCreate(
       this.#generator,
-      MockBuilder.#DEFAULT_QUANTITY,
+      MockObjectBuilder.#DEFAULT_QUANTITY,
       this.#source
     );
     return models[0];
@@ -86,7 +86,7 @@ class MockBuilder<T> implements Builder<T> {
     const models = innerPick(
       this.#generator,
       paths,
-      MockBuilder.#DEFAULT_QUANTITY,
+      MockObjectBuilder.#DEFAULT_QUANTITY,
       this.#source
     );
     return models[0];
@@ -98,8 +98,8 @@ class MockBuilder<T> implements Builder<T> {
   };
 }
 
-export const mockFactory = <T>(generator: FactoryGenerator<T>): Builder<T> => {
-  const builder = new MockBuilder<T>(generator);
+export const objectFactory = <T>(generator: FactoryGenerator<T>): ObjectBuilder<T> => {
+  const builder = new MockObjectBuilder<T>(generator);
 
   return builder;
 };
