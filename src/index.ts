@@ -52,9 +52,15 @@ class MockBuilder<T> implements Builder<T> {
 
   #generator: FactoryGenerator<T>;
   #source?: Partial<T>;
+  #seed?: number;
 
   constructor(generator: FactoryGenerator<T>) {
     this.#generator = generator;
+  }
+
+  seed = (seed?: number): Builder<T> => {
+    faker.seed(seed);
+    return this;
   }
 
   assign = (object: Partial<T>): Builder<T> => {

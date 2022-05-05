@@ -181,7 +181,7 @@ describe("mock-factory", () => {
         expect(model.lastname).toBe("Dafoe")
       });
 
-      it("sshould create an array with n number of new objects with provided overrides", () => {
+      it("should create an array with n number of new objects with provided overrides", () => {
         const UserFactory = mockFactory<User>(faker => ({
           firstname: faker.name.firstName(),
           lastname: faker.name.lastName()
@@ -203,6 +203,52 @@ describe("mock-factory", () => {
   
           expect(model.lastname).toBe("Dafoe")
         })
+      });
+    });
+
+    describe("seed", () => {
+
+      type User = {
+        firstname: string;
+        lastname: string;
+      }
+
+      it("should generate the same object for the same seed", () => {
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const model1 = UserFactory.seed(666).create();
+        const model2 = UserFactory.seed(666).create();
+  
+        expect(model1).toMatchObject(model2);
+      });
+
+      it("should not generate the same object for the different seeds", () => {
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const model1 = UserFactory.create();
+        const model2 = UserFactory.seed(666).create();
+        const model3 = UserFactory.seed(123).create();
+  
+        expect(model1).not.toMatchObject(model2);
+        expect(model1).not.toMatchObject(model3);
+        expect(model2).not.toMatchObject(model3);
+      });
+
+      it("should generate same objects for the same seed when creating many", () => {
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const modelList = UserFactory.seed(666).createMany(2);
+  
+        expect(modelList[0]).not.toMatchObject(modelList[1]);
       });
     });
   });
