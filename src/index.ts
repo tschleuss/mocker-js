@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import type { FactoryApi, CreateApi, FactoryGenerator } from './types';
+import type { FactoryApi, CreateApi, FactoryGenerator, Builder } from './types';
 
 const innerCreate = <T> (generator: FactoryGenerator<T>, quantity = 1) => {
   const models = Array.from({ length: quantity }).map(() => generator(faker))
@@ -18,24 +18,36 @@ const innerPick = <T> (generator: FactoryGenerator<T>, paths: Array<keyof T>, qu
   });
 }
 
-export const mockFactory = <T> (generator: FactoryGenerator<T>): FactoryApi<T> => {
-  
-  function create(): T;
-  function create(quantity: number): T[];
-  function create(quantity?: number): T | T[] {
-    const models = innerCreate(generator, quantity)
-    return (quantity ?? 1) > 1 ? models : models[0];
+class MockBuilder<T> implements Builder<T> {
+  #generator: FactoryGenerator<T>;
+
+  constructor(generator: FactoryGenerator<T>) {
+    this.#generator = generator;
   }
 
-  function pick(paths: Array<keyof T>): Partial<T>;
-  function pick(paths: Array<keyof T>, quantity: number): Partial<T>[];
-  function pick(paths: Array<keyof T>, quantity?: number): Partial<T> | Partial<T>[] {
-    const models = innerPick(generator, paths, quantity)
-    return (quantity ?? 1) > 1 ? models : models[0];
+  create = (): T => {
+    const models = innerCreate(this.#generator)
+    return models[0];
   }
 
-  return {
-    create,
-    pick,
+  createMany = (quantity: number): T[] => {
+    const models = innerCreate(this.#generator, quantity)
+    return models;
   }
+
+  createWith = (paths: Array<keyof T>): Partial<T> => {
+    const models = innerPick(this.#generator, paths)
+    return models[0];
+  }
+
+  createManyWith = (quantity: number, paths: Array<keyof T>): Partial<T>[] => {
+    const models = innerPick(this.#generator, paths, quantity)
+    return models;
+  }
+}
+
+export const mockFactory = <T> (generator: FactoryGenerator<T>): Builder<T> => {
+  const builder = new MockBuilder<T>(generator);
+
+  return builder;
 }
