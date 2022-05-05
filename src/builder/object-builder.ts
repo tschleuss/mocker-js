@@ -1,15 +1,15 @@
 import { faker } from "@faker-js/faker";
 import { objectCreate } from "~/creators/object-create";
 import { objectPick } from "~/creators/object-pick";
-import type { FactoryGenerator, IObjectBuilder } from "~/types";
+import type { ObjectGenerator, IObjectBuilder } from "~/types";
 
 const DEFAULT_QUANTITY = 1;
 
 export class ObjectBuilder<T> implements IObjectBuilder<T> {
-  #generator: FactoryGenerator<T>;
+  #generator: ObjectGenerator<T>;
   #source?: Partial<T>;
 
-  constructor(generator: FactoryGenerator<T>) {
+  constructor(generator: ObjectGenerator<T>) {
     this.#generator = generator;
   }
 

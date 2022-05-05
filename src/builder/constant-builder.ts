@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker";
-import type { FactoryGenerator, IConstantBuilder } from "~/types";
+import type { ConstantGenerator, IConstantBuilder } from "~/types";
 
 const DEFAULT_QUANTITY = 1;
 
 export class ConstantBuilder<T> implements IConstantBuilder<T> {
-  #generator: FactoryGenerator<T>;
+  #generator: ConstantGenerator<T>;
 
-  constructor(generator: FactoryGenerator<T>) {
+  constructor(generator: ConstantGenerator<T>) {
     this.#generator = generator;
   }
 

@@ -1,6 +1,6 @@
 import { ObjectBuilder } from "~/builder/object-builder";
-import type { FactoryGenerator, IObjectBuilder } from "~/types";
+import type { ObjectGenerator, IObjectBuilder } from "~/types";
 
 export const objectFactory = <T>(
-  generator: FactoryGenerator<T>
+  generator: ObjectGenerator<T>
 ): IObjectBuilder<T> => new ObjectBuilder<T>(generator);

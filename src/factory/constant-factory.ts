@@ -1,6 +1,6 @@
 import { ConstantBuilder } from "~/builder/constant-builder";
-import type { FactoryGenerator, IConstantBuilder } from "~/types";
+import type { ConstantGenerator, IConstantBuilder } from "~/types";
 
 export const constantFactory = <T>(
-  generator: FactoryGenerator<T>
+  generator: ConstantGenerator<T>
 ): IConstantBuilder<T> => new ConstantBuilder<T>(generator);

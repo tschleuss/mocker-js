@@ -1,11 +1,11 @@
-import type { FactoryGenerator, Source } from "~/types";
+import type { ObjectGenerator, ObjectSource } from "~/types";
 import { objectCreate } from "~/creators/object-create";
 
 export const objectPick = <T>(
-  generator: FactoryGenerator<T>,
+  generator: ObjectGenerator<T>,
   paths: Array<keyof T>,
   quantity: number,
-  source?: Source<T>
+  source?: ObjectSource<T>
 ) => {
   const models = objectCreate(generator, quantity, source);
   return models.map((model) => {

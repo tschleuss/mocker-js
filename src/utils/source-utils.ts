@@ -1,13 +1,13 @@
 import { faker } from "@faker-js/faker";
-import type { Source, FactoryGenerator } from "../types";
+import type { ObjectSource, ObjectGenerator } from "../types";
 
 export const isSourceGenerator = <T>(
-  source: Source<T>
-): source is FactoryGenerator<T> => {
+  source: ObjectSource<T>
+): source is ObjectGenerator<T> => {
   return typeof source === "function";
 };
 
-export const getDefinedSource = <T>(source: Source<T> = {}) => {
+export const getDefinedSource = <T>(source: ObjectSource<T> = {}) => {
   if (isSourceGenerator(source)) {
     return source(faker);
   }

@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker";
-import type { FactoryGenerator, Source } from "~/types";
+import type { ObjectGenerator, ObjectSource } from "~/types";
 import { getPositiveQuantity } from "~/utils/property-validators";
 import { getDefinedSource } from "~/utils/source-utils";
 
 export const objectCreate = <T>(
-  generator: FactoryGenerator<T>,
+  generator: ObjectGenerator<T>,
   quantity: number,
-  source?: Source<T>
+  source?: ObjectSource<T>
 ) => {
   const length = getPositiveQuantity(quantity);
   const sourceObject = getDefinedSource(source);
