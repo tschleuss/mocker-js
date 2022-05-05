@@ -56,6 +56,20 @@ describe("mock-factory", () => {
           expect(typeof model.lastname).toEqual("string");
         })
       });
+
+      it("should create an array with one object if quantity is negative or zero", () => {
+  
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const modelList1= UserFactory.createMany(-1);
+        expect(modelList1).toHaveLength(1);
+
+        const modelList2 = UserFactory.createMany(0);
+        expect(modelList2).toHaveLength(1);
+      });
     });
 
     describe("createWith", () => {
