@@ -1,9 +1,24 @@
 {
-  "name": "mock-factory",
+  "name": "mocker-js",
   "version": "0.0.1",
-  "description": "",
+  "description": "Faker.js factory that helps you generate data based on your project's models for testing.",
+  "keywords": [
+    "mocker",
+    "mocker-js",
+    "faker.js factory",
+    "testing",
+    "model mock",
+    "data mocking"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tschleuss/mocker-js.git"
+  },
   "main": "index.js",
-  "author": "Thyago Schleuss",
+  "author": {
+    "name": "Thyago Schleuss",
+    "email": "tschleuss@gmail.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
