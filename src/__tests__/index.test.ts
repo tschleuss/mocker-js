@@ -133,5 +133,77 @@ describe("mock-factory", () => {
         })
       });
     });
+
+    describe("assign", () => {
+
+      type User = {
+        firstname: string;
+        lastname: string;
+      }
+
+      it("should create a new object with provided overrides", () => {
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const DafoeModel = UserFactory.assign({
+          lastname: "Dafoe",
+        });
+        
+        const model = DafoeModel.create();
+  
+        expect(model).toHaveProperty('firstname');
+        expect(model.firstname).toBeDefined();
+        expect(typeof model.firstname).toEqual("string");
+
+        expect(model.lastname).toBe("Dafoe")
+      });
+
+      it("should create a new object with provided generator", () => {
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const DafoeModel = UserFactory.assign(() => ({
+          lastname: "Dafoe",
+        }));
+        
+        const model = DafoeModel.create();
+
+        console.log("model", model);
+  
+        expect(model).toHaveProperty('firstname');
+        expect(model.firstname).toBeDefined();
+        expect(typeof model.firstname).toEqual("string");
+
+        expect(model.lastname).toBe("Dafoe")
+      });
+
+      it("sshould create an array with n number of new objects with provided overrides", () => {
+        const UserFactory = mockFactory<User>(faker => ({
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName()
+        }));
+  
+        const DafoeModel = UserFactory.assign({
+          lastname: "Dafoe",
+        });
+        
+        const modelList = DafoeModel.createMany(3);
+  
+        expect(modelList).toHaveLength(3);
+        expect(Array.isArray(modelList)).toBeTruthy();
+  
+        modelList.forEach(model => {
+          expect(model).toHaveProperty('firstname');
+          expect(model.firstname).toBeDefined();
+          expect(typeof model.firstname).toEqual("string");
+  
+          expect(model.lastname).toBe("Dafoe")
+        })
+      });
+    });
   });
 });
