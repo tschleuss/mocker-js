@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { objectCreate } from "~/creators/object-create";
-import { objectPick } from "~/creators/object-pick";
+import { objectCreateWith } from "~/creators/object-createWith";
 import type { ObjectGenerator, IObjectBuilder } from "~/types";
 
 const DEFAULT_QUANTITY = 1;
@@ -19,8 +19,9 @@ export class ObjectBuilder<T> implements IObjectBuilder<T> {
   };
 
   assign = (object: Partial<T>): ObjectBuilder<T> => {
-    this.#source = object;
-    return this;
+    const builder = new ObjectBuilder(this.#generator);
+    builder.#source = object;
+    return builder;
   };
 
   create = (): T => {
@@ -38,7 +39,7 @@ export class ObjectBuilder<T> implements IObjectBuilder<T> {
   };
 
   createWith = (paths: Array<keyof T>): Partial<T> => {
-    const models = objectPick(
+    const models = objectCreateWith(
       this.#generator,
       paths,
       DEFAULT_QUANTITY,
@@ -48,7 +49,12 @@ export class ObjectBuilder<T> implements IObjectBuilder<T> {
   };
 
   createManyWith = (quantity: number, paths: Array<keyof T>): Partial<T>[] => {
-    const models = objectPick(this.#generator, paths, quantity, this.#source);
+    const models = objectCreateWith(
+      this.#generator,
+      paths,
+      quantity,
+      this.#source
+    );
     return models;
   };
 }
