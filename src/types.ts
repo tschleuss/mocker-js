@@ -20,4 +20,5 @@ export interface IConstantBuilder<T> {
   seed(seed?: number): IConstantBuilder<T>;
   entry(): T;
   entries(quantity: number): T[];
+  sample(quantity: number): T[];
 }
