@@ -21,8 +21,10 @@
     "email": "tschleuss@gmail.com"
   },
   "license": "MIT",
+  "dependencies": {
+    "@faker-js/faker": "^6.3.1"
+  },
   "devDependencies": {
-    "@faker-js/faker": "^6.3.1",
     "@types/jest": "^27.5.0",
     "jest": "^28.0.3",
     "standard-version": "^9.3.2",
