@@ -1,6 +1,6 @@
 {
   "name": "mocker-js",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Faker.js factory that helps you generate data based on your project's models for testing.",
   "keywords": [
     "mocker",
@@ -30,6 +30,7 @@
     "jest": "^28.0.3",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
+    "standard-version": "^9.3.2",
     "ts-jest": "^28.0.1",
     "typescript": "^4.6.4"
   },
@@ -38,6 +39,7 @@
     "build:clean": "rimraf dist",
     "build:code": "esno ./scripts/bundle.ts",
     "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
-    "build": "run-s build:clean build:code build:types"
+    "build": "run-s build:clean build:code build:types",
+    "release": "standard-version"
   }
 }
