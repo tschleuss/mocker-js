@@ -12,8 +12,8 @@ export interface IObjectBuilder<T> {
   seed(seed?: number): IObjectBuilder<T>;
   create(): T;
   createMany(quantity: number): T[];
-  createWith(paths: Array<keyof T>): Partial<T>;
-  createManyWith(quantity: number, paths: Array<keyof T>): Partial<T>[];
+  createAndPick(paths: Array<keyof T>): Partial<T>;
+  createManyAndPick(quantity: number, paths: Array<keyof T>): Partial<T>[];
 }
 
 export interface IConstantBuilder<T> {

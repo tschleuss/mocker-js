@@ -1,7 +1,7 @@
 import type { ObjectGenerator, ObjectSource } from "~/types";
 import { objectCreate } from "~/creators/object-create";
 
-export const objectCreateWith = <T>(
+export const objectCreateAndPick = <T>(
   generator: ObjectGenerator<T>,
   paths: Array<keyof T>,
   quantity: number,

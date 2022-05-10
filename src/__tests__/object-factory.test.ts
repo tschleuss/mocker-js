@@ -60,7 +60,7 @@ describe("objectFactory", () => {
 
   describe("createWith", () => {
     it("should create a new object only with provided key paths", () => {
-      const model = UserFactory.createWith(["firstname", "age"]);
+      const model = UserFactory.createAndPick(["firstname", "age"]);
 
       expect(model).toHaveProperty("firstname");
       expect(model.firstname).toBeDefined();
@@ -78,7 +78,7 @@ describe("objectFactory", () => {
 
   describe("createManyWith", () => {
     it("should create an array with n number of new objects only with provided key paths", () => {
-      const modelList = UserFactory.createManyWith(6, ["firstname", "age"]);
+      const modelList = UserFactory.createManyAndPick(6, ["firstname", "age"]);
 
       expect(modelList).toHaveLength(6);
       expect(Array.isArray(modelList)).toBeTruthy();
