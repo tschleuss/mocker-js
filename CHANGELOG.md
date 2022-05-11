@@ -4,9 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## 1.0.0 (2022-05-11)
 
-## 1.0.0 (2022-05-11)
-
-## 1.0.0 (2022-05-11)
-
 ### Features
-* First stable version
+
+* First stable release containing:
+  * `objectFactory` to mock objects
+  * `constantFactory` to mock constants
