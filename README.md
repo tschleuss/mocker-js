@@ -97,9 +97,9 @@ const ChildModel = UserFactory.assign(faker => ({
 const model = ChildModel.create();
 ```
 
-### Generating consistent mock Users
+## Generating consistent mock Users
 
-Sometimes you need you generated mock object to be the same on each test, instead of having it being randomly generated, for example, for snapshopt testing.
+Sometimes you want your mocked object to be the same across multiple test runs, like for snapshopt testing.
 
 ```js
 import { UserFactory } from 'my/factory/of/user';
