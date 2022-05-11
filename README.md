@@ -48,7 +48,7 @@ import type { User } from "my/user/type/model";
  * define static values and so on..
  */
 const UserFactory = objectFactory<User>((faker) => ({
-  id: fake.datatype.uuid(),
+  id: faker.datatype.uuid(),
   firstname: faker.name.firstName(),
   lastname: faker.name.lastName(),
   address: faker.address.streetAddress(),
