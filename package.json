@@ -1,6 +1,6 @@
 {
   "name": "mocker-js",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Faker.js factory that helps you generate data based on your project's models for testing.",
   "keywords": [
     "mocker",
